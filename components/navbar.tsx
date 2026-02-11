@@ -1,50 +1,51 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Menu, X, Search } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { cn } from "@/lib/utils"
-import { useMobile } from "@/hooks/use-mobile"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { cn } from "@/lib/utils";
+import { useMobile } from "@/hooks/use-mobile";
+import Hotline from "./ui/hotline";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const pathname = usePathname()
-  const isMobile = useMobile()
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isMobile = useMobile();
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
+      setIsScrolled(window.scrollY > 10);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (isOpen && isMobile) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"
+      document.body.style.overflow = "auto";
     }
 
     return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [isOpen, isMobile])
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen, isMobile]);
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Gigs", path: "/gigs" },
-    { name: "Post a Job", path: "/post-job" },
-    { name: "Become a Freelancer", path: "/register-freelancer" },
-  ]
+    { name: "Trang chủ", path: "/" },
+    { name: "Sản phẩm", path: "/san-pham" },
+    { name: "Giới thiệu", path: "/gioi-thieu" },
+    { name: "Liên hệ", path: "/lien-he" },
+  ];
 
   return (
     <header
@@ -78,13 +79,10 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-4">
             <div className="relative w-64">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search skills or services..." className="pl-8 pr-4" />
+              <Input placeholder="Tìm kiếm..." className="pl-8 pr-4" />
             </div>
             <ThemeToggle />
-            <Button variant="outline" size="sm">
-              Log In
-            </Button>
-            <Button size="sm">Sign Up</Button>
+            <Hotline />
           </div>
 
           {/* Mobile Navigation */}
@@ -99,11 +97,11 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 top-16 z-50 bg-background md:hidden animate-fade-in">
+        <div className="fixed right-0 left-0 z-50 bg-white md:hidden animate-fade-in">
           <div className="container mx-auto px-4 py-6 flex flex-col space-y-6">
             <div className="relative">
-              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search skills or services..." className="pl-8 pr-4" />
+              <Search className="absolute left-2 top-2` .5 h-4 w-4 text-muted-foreground" />
+              <Input placeholder="Tìm kiếm..." className="pl-8 pr-4" />
             </div>
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
@@ -120,17 +118,14 @@ const Navbar = () => {
                 </Link>
               ))}
             </nav>
-            <div className="flex flex-col space-y-4 pt-4 border-t">
-              <Button variant="outline" className="w-full">
-                Log In
-              </Button>
-              <Button className="w-full">Sign Up</Button>
+            <div className="mt-6">
+              <Hotline />
             </div>
           </div>
         </div>
       )}
     </header>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

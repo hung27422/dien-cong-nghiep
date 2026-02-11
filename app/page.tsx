@@ -1,9 +1,9 @@
-import Hero from "@/components/hero"
-import FeaturedGigs from "@/components/featured-gigs"
-import HowItWorks from "@/components/how-it-works"
-import Testimonials from "@/components/testimonials"
-import Categories from "@/components/categories"
-import CallToAction from "@/components/call-to-action"
+import Hero from "@/components/hero";
+import FeaturedGigs from "@/components/featured-gigs";
+import HowItWorks from "@/components/how-it-works";
+import Testimonials from "@/components/testimonials";
+import Categories from "@/components/categories";
+import CallToAction from "@/components/call-to-action";
 
 export default function Home() {
   return (
@@ -15,5 +15,5 @@ export default function Home() {
       <Testimonials />
       <CallToAction />
     </div>
-  )
+  );
 }
